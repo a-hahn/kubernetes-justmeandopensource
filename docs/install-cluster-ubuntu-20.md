@@ -3,6 +3,11 @@ Follow this documentation to set up a Kubernetes cluster on __Ubuntu 20.04 LTS__
 
 This documentation guides you in setting up a cluster with one master node and one worker node.
 
+see also:  
+[**4 ways to bootstrap a kubernetes cluster [medium.com]**](https://medium.com/containerum/4-ways-to-bootstrap-a-kubernetes-cluster-de0d5150a1e4)  
+[**A step-by-step guide to get kubernetes running inside an LXC container [github.com]**](https://github.com/corneliusweig/kubernetes-lxd)  
+[**Install Kubernetes Cluster on Ubuntu 20.04 with kubeadm [computing for geeks]**](https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm)  
+
 ## Assumptions
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
@@ -52,6 +57,12 @@ mknod /dev/kmsg c 1 11
 echo '#!/bin/sh -e' >> /etc/rc.local
 echo 'mknod /dev/kmsg c 1 11' >> /etc/rc.local
 chmod +x /etc/rc.local
+```
+
+**NOTE** according to https://github.com/corneliusweig/kubernetes-lxd#installing-kubernetes-in-the-lxc-container
+this is an alternative way to provide a dummy /dev/kmsg (for linux based on systemd - as with Ununtu)
+```
+ echo 'L /dev/kmsg - - - - /dev/console' > /etc/tmpfiles.d/kmsg.conf
 ```
 
 ## On kmaster
